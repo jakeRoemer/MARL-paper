@@ -1,0 +1,7 @@
+\section{Introduction}
+Computer games are among the most popular applications for artificial intelligence. When developing an AI for a game, it is important to consider creating a realistic opponent, which requires that AI agents correctly capture human intelligence. Current AI techniques use oracles to simulate cooperative decisions. In a realistic environment, units might not have the same information as other friendly units. To better simulate this scenario, each unit will act as an individual and cooperate with its allies via communication.
+
+In this paper, we propose MARLs, \MARL\ with Limited Sharing, to give a competitive yet realistic challenge to the player~\cite{Busoniu08CompSurvey}. The agents will learn independently but share information amongst their allies. In a realistic setting, two allies cannot communicate all accumulated information instantaneously, so we limit the amount of information which can be passed and between whom it can be passed per turn. This will require that the agents prioritize which information to share and with whom. We compare MARLs to an independent multi-agent that cannot share information and an oracle multi-agent with unlimited information sharing.
+%who shares the full set of possible information between multi-agents per turn.
+
+%paper organizton??

@@ -1,0 +1,14 @@
+\subsection{Cooperative Agent}\label{Coop_Agent}
+
+The cooperative agent is implemented with limited message sharing. In our implementation, during every turn each unit shares its updated Q-Values with a subset of its allies, no greater than 3, who are selected at random. The chosen allies will share their state experience, by sharing the actions associated with the shared state. This includes sharing both unencountered action-state pairs and perviously encountered action-state pair.
+
+Q-Values are also shared when determining the result of the Value function, which helps emphasize a good action even if a unit has not taken it yet, but an ally has. Because the cooperative agent has the ability to share some limited experience between units, we expect it to perform better than the independent agent.
+
+
+%The Cooperative agent is implemented with limited message sharing. In our implementation, each unit shares information with allies, but is limited to only sharing with a set number of allies and only specifically requested information. Units of the same team are allowed to share learned experiences, or Q-Values, with each other when determining which action to take. Q-Values are also shared when determining the result of the Value function, which helps emphasize a good action even if a unit has not taken it yet, but an ally has.
+
+%to shared experiences with each other, \qVal, when determining which action to take. \qVal\ are also shared when determining the result of the Value function which helps emphasize a good action even if a unit has not taken it yet, but an ally has.
+
+
+%There are a number of types of messages sharing which AI agents can employ to cooperate. 
+%Among Three types of messages \ref{background} are facts, such as the location of an enemy unit or an agent's intended action, events, including an agent's perceived environment, action taken, and result, and learned policies, such as retreating when surrounded by multiple enemy units~\cite{Tan93IndepVsCoop}. In our approach, we will employ the first of these, fact sharing. Agents will be able to share their own location and that of enemies within their range of sight with their allies.

@@ -1,0 +1,89 @@
+\section{Reviews} The reviews and responses are listed below. Since the section number in the final version of the paper is different from the initial version, we added the name of the section which the reviewer mentioned in brackets.
+%is Since we need an extra page describing how we incorporate the reviews into the paper we can just address them one at a time and comment the changes made here.
+
+\subsection{Review 1}
+\begin{enumerate}
+\item Please include more related work to explain the message sharing (e.g. facts and events)\\
+{\it Response : }Message sharing is explained in more detail in the later section-\ref{Oracle_Agent}, \ref{Coop_Agent}, \ref{Independent_Agent}.
+
+\item Although introduced in details later, could you explain action, state and rewards in more details in section 3.1 and 3.2 (Reinforcement learning and multiple agent learning) maybe with some examples.\\
+{\it Response : }We added some additional detail to section-\ref{RL}.
+\item I suppose some parameters for the variables in Equation 1 are not shown explicitly, e.g. 'r' has parameters 'state' and 'action'.\\
+{\it Response : }We added explanations for each variable in the equation.
+\item Maybe you could introduce each kind of agent first and compare them in a new section\\
+{\it Response : }We briefly added a section-\ref{AgentDesign}
+\item For the result, could you run examples with larger board size and team size?\\
+{\it Response : }We include results for 5x8. Results for larger sizes perform similarly but take longer, so we opt to not include these in the paper due to space limitations.
+\end{enumerate}
+
+\subsection{Review 2}
+\begin{enumerate}
+\item In Equation (1),neither the description nor the intuitive reasoning behind the parameter 'α' is not given. From the context, I am to understand that it is a learning rate similar to the stochastic gradient descent method. It would be nice to clarify the same in this proposal.  %added the explanation for alpha
+\\{\it Response : }See review 1, point 3.
+
+\item The section about the usage of Q-Values in the overall algorithm is a little handwavy - the precise way how it determines the overall running of the algorithm is not mentioned in sections 3.3 (Q-Learning) which manifests in an unclear understanding of section 4.1 (Oracle Agent) - The sentence "On the other hand if the black circled units are controlled by oracle agent then the agent will choose either unit-1 or unit-2 based on their Q-values to attack unit-A" is hard to comprehend when the exact role of Q-Values if not known. 
+\\{\it Response : } We added more detail to section-\ref{QL}, and the section quoted above was completely removed from the paper as we took a different direction with our message sharing implementation.
+
+
+\item I believe that there is a discrepancy in the results for table 1. In the event that there are 2 teams with 1 member each where the game ends in a single turn - both independent and oracle play should produce the same result (since they are the same in this particular case). However it seems from the table that there is an imbalance in the two. That is the ratio is 0.82:0.17 whereas it should have been 0.5 to 0.5 since the two are essentially equivalent. (This result is surprisingly reflected in table 2). It may be a problem in my understanding of the table semantics however it would behoove the authors to provide clarity in the said aspect in the final draft. 
+\\{\it Response : }New figures are added instead of the tables in the revised version to clarify this confusion.
+
+
+\item The authors don't provide any analysis for the convergence of the gameplay algorithm. More specifically, I am curious if there can be any situations where there is a deadlock in the game play (I can envision a situation where there are two agents left in a board and one agent plays the game offensively while the other agent plays defensively essentially producing a "cat-mouse" situation which can extend the game for a large turns - such a situation while uncommon may occur). I believe that the parameters in the Q-Value computation can help in determining if such an analysis exists or not. 
+\\{\it Response : } If by convergence, the reviewer meant when we should stop training our algorithm to start testing with. We agreed that there is no true convergence since agents learn indefinitely. As an evaluation, we show that there is a point in which learning for an agent in a particular game setup will stop making significant process.
+
+\item I believe that section 4.3 can benefit from some clarity. The two parameters which are crucial to correct information sharing - " limited to only sharing with a set number of allies and only specifically requested information. " It is not clear how the first parameters will be determined. Also not clear is how the agents will learn the information to be requested - is it a part of the learning or will it be fixed. In the former case, the ML complexity of the algorithm increases while in the latter case, it will suffer from slow learning rate since it may keep on optimization over a set of values on which we already have sufficient information. 
+\\{\it Response : } The number of allies to share information with is random. So when sharing, we choose a random subset of allies to share with. The actual process of sharing information with allies happens by sharing Q-Values after an action is taken. Given a set of allies to share with, if a chosen ally has also taken the same action as some point the Q-Value for the unit and the ally are averaged together. In addition to averaging Q-Values, the value function will also average the Q-Values of the next state. The same subset of allies will be chosen to share with and if a chosen ally has also taken the same next action at some point the Q-Value for the unit and the ally used to calculate the Value Function will average together.
+
+\end{enumerate}
+
+\subsection{Review 3}
+\begin{enumerate}
+\item would suggest moving the description of the game that is being played earlier in the paper.
+\\{\it Response : }We restructured the paper to introduce the game earlier.
+
+\item I was confused on the specific type of game being played when I started reading.
+I was confused about the results. Why, in the case of a single unit, would one algorithm outperform another. 
+\\{\it Response : } In case of single unit, the point is that there is no difference in the performance of different AI agents. Whichever team starts first wins.
+
+\item Even in section 5 you mention that no sharing is being done, so each algorithm should perform the same, but Table 1 shows differently. Could you address this or clarify this?
+\\{\it Response : } Corrected this and replaced the table with our new results Fig-\ref{fig:1v1}.
+
+\item In Table 2 the results between the algorithms seem close enough to maybe be statistical error. How are you sure that one algorithm outperforms another?
+\\{\it Response : }We changed the presentation of results to emphasize that the differences in performance are not, in fact, that strong.
+
+\item I would like to see some questions asked at the end about generalizing. Could this technique work for a less contrived game, like a modern turn based or RTS game? 
+\\{\it Response : }The different AI make decision based on different states, the possible actions from those states, and what kind of reward a unit should receive for taking an action. If states, actions, and rewards are properly defined for each game then the algorithm simply needs a new state as an input and will provide an action to take.
+
+
+\item Does cooperative passing provide a better experience for a user, or do they not care?
+\\{\it Response : }for 1 user there is no difference
+
+\item I noticed a small typo in section 2(BACKGROUND AND RELATED WORK): messages passing
+\\{\it Response : }Typo corrected
+\item All in all I think this is a good and interesting paper.
+\end{enumerate}
+
+\subsection{Review 4}
+\begin{enumerate}
+\item The biggest problem is that you didn't describe Cooperative Agent clearly in section 4.3, while Cooperative Agent is supposed to be your key innovation in this paper. You may add some explanation of how the Cooperative Agent incorporates (uses) the received information and in what ways it is different from the Oracle Agent.\\
+{\it Response : }Added the explanation for cooperative agent in section-\ref{Coop_Agent}.
+
+\item It is not appropriate to say that Reinforcement Learning is a form of Unsupervised Learning. The "prior knowledge" in a Reinforcement Learning system is the rewards, or the rewards generating system. A more rational division of  learning algorithms should be Supervised Learning, Unsupervised Learning and Reinforcement Learning.\\
+{\it Response : }We changed how we introduce and describe Reinforcement Learning.
+
+\item In your first experiment, where there is only one unit, the result shows a clear relationship that Oracle Agent outperforms Cooperative Agent, and Cooperative Agent is better than Independent Agent. How do you explain this? If it is totally because of the order that who runs first, you may start from a randomly selected agent at each episode.\\
+{\it Response : }See review 3, point 2
+
+\item The order of your bibliography is confusing. For example, the number of your bibliography jumps from "[1]" to "[6]", and then jumps back to "[4]" in your introduction and background section.\\
+{\it Response : }We use abbrv format, which is an acceptable bibliography format.
+
+\item The explanation to Formula 1 in your paper is correct in general. However, if you are familiar with the mathematical derivation of  the Markov Decision Process, it may not be appropriate to use "V" as the  optimal Q value, since "V" is commonly used to denote the state-value function. In addition, the explanation of "V" in your paper should be more accurate. In another word, you should tell explicitly for which state "V" is the maximal Q-value. Perhaps it is helpful for you to take a deeper study of the mathematical foundation of Reinforcement Learning and Bellman Equation.\\
+{\it Response : }See review 1, point 3
+
+\item The keywords you selected may be inappropriate, since the concept of one keyword may belong to another one.\\
+{\it Response : }Conference papers also have some overlapping keywords, so we think this is fine
+
+\item Some prior art you mentioned may not be directly relevant to the topic of this paper, for example, the multi-agent foraging example in the background section.\\
+{\it Response : }It is added as a concrete example of Multi Agent Systems, especially demonstrating a situation where multiple agents may have limited bandwidth with which to share information.
+\end{enumerate}

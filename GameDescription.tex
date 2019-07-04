@@ -1,0 +1,32 @@
+\section{Game Description} \label{Game Description}
+
+Our aim is to develop a board game with two teams of intelligent units to depict the importance of message sharing in an MAS. The game takes place on a two-dimensional grid of arbitrary size. The players consist of two teams with an equal number of agents, which we will refer to as units throughout the rest of the paper. The number of units scale with the size of the grid. The teams are initially placed on opposite sides of the grid using a normal distribution around a centralized point.
+
+The game is turn based, with each team taking its turn after the other. Each unit can move and attack within a turn, in either order. All the units of a team execute their actions simultaneously. Movement is limited in direction to forwards, backwards, left, and right and in distance to a maximum movement speed scaling with the grid. Attacking is limited to units, including allies, diagonal to the current position. After attacking, the unit moves into the position formerly occupied by the defending unit, similar to the capturing movement by pawns in chess. Movement speed is determined by equation 1, where \#Rows denotes the rows of the grid and \#Columns denotes the columns of the grid. Line of sight is limited to visible squares within a radius of movement speed + 1.
+
+\vspace{-.3 cm}
+
+\begin{equation}\label{eqn:moveSpeed}
+Move\_Speed = \frac{\#Rows + \#Columns}{10}
+\end{equation}
+
+The objective of each team is to kill all units of the opposing team. For testing, the three different types of MARL AI algorithms will play against each other. In order to handle a deadlock, where one or both teams begin to act evasively, we impose a maximum number of turns per game (default is 50) and determine the winner by score. The score of each team is determined based on equations:~\ref{eqn:score} -~\ref{eqn:ppu}.
+
+% EQN of score
+\vspace{-.5 cm}
+
+\begin{equation}\label{eqn:score}
+Score = PPU * (NU - Alive\_{EU}) - TurnPenalty 
+\end{equation}
+
+\vspace{-.4 cm}
+
+\begin{equation}\label{eqn:ppu}
+PPU = \dfrac{Total\_Starting\_Points}{NU}
+\end{equation}
+
+\vspace{-.05 cm}
+
+$NU$ is the starting number of units per team. $Alive\_{EU}$ is the number of enemy units which are still alive and $TurnPenalty$ is the number of turns taken before the game ended.
+ 
+

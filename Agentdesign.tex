@@ -1,0 +1,54 @@
+\section{Agent Design} \label{AgentDesign}
+
+\subsection{Agents}
+
+We have adopted three different MARL AI algorithms based on the amount of information shared within the Q-learning implementation~\cite{Hu98TheoreticFramework}. We use learned policy sharing in the form of Q-Value sharing for explored state-action pairs. When one unit shares Q-Values with an allied unit, the receiving unit copies the sharing unit's Q-Values for previously unencountered action-state pairs. For previously encountered action-state pairs, the receiving unit averages its current Q-Value with that of the sharing unit. Percepts and events are not shared. The first implementation is an oracle agent with unlimited sharing of Q-Values between allied units. The second is a cooperative agent with limited sharing of Q-Values. The third implementation is an independent agent with no sharing of Q-Values. 
+
+
+
+
+
+%We have not implemented obstacles yet
+
+%The game takes place on a two-dimensional grid of arbitrary size. The players consist of two teams of agents, which we will refer to as units throughout the rest of the paper. The number of units scale with the size of the grid. The teams are initially placed on opposite sides of the grid using a normal distribution around a centralized point.
+
+%We did not limit movement when trying to move through a space an enemy already occupies. Units cannot move through positions occupied by obstacles or enemy units.
+
+%The game is turn based, with each team taking its turn after the other. Each unit can move and attack within a turn, in either order. All the units of a team execute their actions simultaneously. Movement is limited in direction to forwards, backwards, left, and right and in distance to a maximum movement speed scaling with the grid. Attacking is limited to units (friend or foe) diagonal to the current position. After an attack, the attacking unit moves into the position formerly occupied by the defending unit, similar to the capturing movement by pawns in chess. How far a unit can move is determined by equation~\ref{eqn:moveSpeed}. Here, $\#Rows$ denotes the rows of the grid and $\#Columns$ denotes the columns of the grid. In addition to limiting movement, each unit's knowledge is limited to a fixed number of visible squares defined as Move\_Speed + 1.
+
+%\vspace{-.3 cm}
+
+%\begin{equation}\label{eqn:moveSpeed}
+%Move\_Speed = \frac{\#Rows + \#Columns}{10}
+%\end{equation}
+
+%In addition to limiting movement, obstacles also limit units' line of site, preventing them from knowing what is on the opposite side. Each unit's knowledge is limited to what it can see within a 5 square radius. \\
+
+%The objective for each team is to kill all units of the opposing team. For testing, the three different types of MARL AI algorithms will play against each other. In order to handle a draw, where units decide to stop attacking in order to keep living, MARLS imposes a maximum number of turns per game (default is $50$). If neither team can win within the turn limit, then the winner is decided by score. The score of each team is  determined based on equations:~\ref{eqn:score} -~\ref{eqn:ppu}.
+%and the game will allow for a human to play against an AI or for two different AI implementations to play against each other. In order to prevent a draw condition, we will impose a maximum number of turns per game (here we choose it as $10$. When this maximum is reached, the score will be determined based on equation-~\ref{eqn:score}. Finally the winner is determined based on higher score.
+%percentage of surviving units on each team and the number of steps taken per team.
+
+% EQN of score
+%\vspace{-.5 cm}
+
+%\begin{equation}\label{eqn:score}
+%Score = PPU * (NU - Alive\_{EU}) - TurnPenalty 
+%\end{equation}
+
+%\vspace{-.4 cm}
+
+%\begin{equation}\label{eqn:ppu}
+%PPU = \dfrac{Total\_Starting\_Points}{NU}
+%\end{equation}
+
+%\vspace{-.05 cm}
+
+%Teams have the same starting size. $NU$ is the starting number of units per team. $Alive\_{EU}$ is the number of enemy units which are still alive. TurnPenalty is the number of turns taken before the game ended.
+
+%A unit receives a positive reward when it kills an enemy unit and a negative reward when it is killed or kills an ally. Reward values range from [-1,1]. The highest reward is for killing an enemy, $1$. The lowest reward is for killing an ally or getting killed, $-0.75$. Rewards are also given for proximity to enemy units, $0.5$, and ally units, $0.25$.
+
+%Units pick actions based on the exploration-exploitation techniques of the underlying MARL algorithms controlling each team. We have adopted three different MARL AI algorithms based on the amount of information shared within the Q-learning implementation~\cite{Hu98TheoreticFramework}. Each joint action decision for each team is determined by either the Oracle, Independent, or Cooperative algorithm using a utility function based on the current game state and set of possible actions for that state. In the following subsections we present a brief description of these three MARL AI algorithms.
+
+
+
+%Should we explain exploration-exploration or use a different term to describe what the AI algorithms are doing?

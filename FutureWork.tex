@@ -1,0 +1,9 @@
+\section{Future Work} \label{futurework}
+
+
+The performance increase obtained by information sharing in our results was modest. We have identified a number of ways in which the algorithms and game could be modified to potentially increase performance by information sharing. The message sharing could be modified to include sharing percepts and events. In this context, that could mean allowing units to know the locations of their allied units beyond their line of sight and the locations of enemy units seen by their allies. The units could also share not just new Q-Values, but every state-action-reward tuple so that allied units can update their Q-Values with this information even after a given state-action pair has been explored once. Sharing can also be extended from only sharing with allies to sharing with yourself as well. It is possible to find the degree of similarity between a unit's current state and different states a unit has already visited and predict the best next action based on the actions taken in similar previous states. The agents could also be modified to have a commander unit, which would make decisions for all of its allied units to help the team as a whole.
+ \endinput
+ 
+ %independent :: may have a commander
+ %cooperative :: may share other 2 formats of message
+ %coopeartive :: share state with self
